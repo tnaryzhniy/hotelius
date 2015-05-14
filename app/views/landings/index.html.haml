@@ -1,0 +1,45 @@
+.center.jumbotron
+  %h1
+    Welcome to Hotelius!
+    %br/
+    %small
+      The best hotel raiting site
+  - if user_signed_in?
+    = link_to "Add new hotel", new_hotel_path, class: "btn btn-danger btn-lg"
+  - else
+    = link_to "Sign up now!", new_user_registration_path, class: "btn btn-danger btn-lg"
+%h3
+  .center This is the list of TOP 5 hotels
+%br/
+
+.col-md-12
+  %table.table.table-hover
+    %thead
+      %tr.danger
+        %th.col-md-1 Show
+        %th.col-md-2 Title
+        %th.col-md-1 User raiting
+        %th.col-md-3 Room description
+        %th.col-md-3 Price
+        %th.col-md-2 Foto
+    - @top5.each do |hotel|
+      %tbody
+        %tr
+          %td= link_to 'Show', hotel_path(hotel.id)
+          %td
+            %b>= hotel.title
+            ,
+            %p
+              Stars: #{hotel.stars}
+          %td= hotel.aver_raiting.round(2)
+          %td
+            %p= hotel.rooms
+            %p
+              Breakfast:
+              - if hotel.breakfast
+                %b present
+              - else
+                %b no breakfast
+          %td= hotel.price
+          %td
+            = image_tag hotel.foto.url.to_s, height: '100px' if hotel.foto?
