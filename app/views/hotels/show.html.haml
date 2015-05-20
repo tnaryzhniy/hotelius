@@ -1,3 +1,9 @@
+%h3
+  %b
+    = @hotel.title
+  %small
+    description
+%br/
 .row
   .col-md-6
     %table.table.table-hover
@@ -50,15 +56,16 @@
         %p
           %strong Commenter:
           = raiting.commenter
-        %p
-          %strong Comment:
-          = raiting.comment
+        - if raiting.comment?
+          %p
+            %strong Comment:
+            = raiting.comment
         %p
           %strong Raiting:
           = raiting.raiting
     %h2 Add a comment:
     - if user_signed_in?
-      = simple_form_for([@hotel, @hotel.raitings.build]) do |f|
+      = simple_form_for([@hotel, @raiting]) do |f|
         = f.error_notification
         %p
           = f.label :commenter
@@ -71,6 +78,8 @@
         %p
           = f.input :raiting, as: :radio_buttons, collection: 1..5
         %p
+          = f.input :user_id, as: :hidden, :input_html => { :value => current_user.id }
+          = f.input :commenter, :as => :hidden, :input_html => { :value => current_user.email }
           = f.submit
     - else
       .well.well-sm

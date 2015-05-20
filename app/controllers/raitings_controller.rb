@@ -3,7 +3,7 @@ class RaitingsController < ApplicationController
 
   def create
     @hotel = Hotel.find(params[:hotel_id])
-    @hotel.create_raiting(raiting_params, current_user)
+    @hotel.create_raiting(raiting_params)
     redirect_to hotel_path(@hotel)
   end
 
@@ -12,6 +12,6 @@ class RaitingsController < ApplicationController
   private
 
   def raiting_params
-    params.require(:raiting).permit(:comment, :raiting)
+    params.require(:raiting).permit(:comment, :raiting, :user_id, :commenter)
   end
 end

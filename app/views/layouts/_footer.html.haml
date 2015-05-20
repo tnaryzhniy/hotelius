@@ -1,7 +1,11 @@
 %footer.footer
-  %small
-    The RoR based simple hotel advisor aplication.
-  %nav
-    %ul.list-unstyled.list-inline.nav.navbar-nav.pull-right
-      %li= link_to "Home", root_path
-      %li= link_to "Hotels", hotels_path
+  .navbar-inner
+    .container
+      %small
+        The RoR based simple hotel advisor aplication.
+      %nav
+        %ul.list-unstyled.list-inline.nav.navbar-nav.pull-right
+          %li
+            = link_to "Home", root_path
+          %li
+            = link_to "Hotels", hotels_path

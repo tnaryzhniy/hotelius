@@ -13,11 +13,8 @@ class Hotel < ActiveRecord::Base
   validates :stars, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
   validates :price, allow_blank: true, format: { with: VALID_PRICE_REGEX }
 
-  def create_raiting(parameters, current_user)
+  def create_raiting(parameters)
     @raiting = raitings.build(parameters)
-    @raiting.user_id = current_user.id
-    @raiting.commenter = current_user.email
-    @raiting.save
     update_raiting
   end
 

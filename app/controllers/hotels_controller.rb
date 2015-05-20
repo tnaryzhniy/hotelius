@@ -9,6 +9,7 @@ class HotelsController < ApplicationController
 
   def show
     @hotel = Hotel.find(params[:id])
+    @raiting = @hotel.raitings.build
   end
 
   def new
