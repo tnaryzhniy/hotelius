@@ -1,16 +1,8 @@
 %h3
   %b
     = @hotel.title
-.col-md-6.col-md-offset-3
-  - if @raiting.errors.any?
-    #error_explanation.well
-      %h2.panel-danger
-        = pluralize(@raiting.errors.count, "error")
-        prohibited
-        raiting for this hotel from being saved:
-      %ul.list-unstyled
-        - @raiting.errors.full_messages.each do |msg|
-          %li.label-danger= msg
+  %small
+    description
 %br/
 .row
   .col-md-6

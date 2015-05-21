@@ -1,10 +1,19 @@
 class RaitingsController < ApplicationController
   before_filter :authenticate_user!
 
+  #def new
+  #  @hotel = Hotel.find(params[:hotel_id])
+  #  @raiting = @hotel.raitings.new
+  #end
+
   def create
     @hotel = Hotel.find(params[:hotel_id])
-    @hotel.create_raiting(raiting_params)
-    redirect_to hotel_path(@hotel)
+    @raiting = @hotel.raitings.new(raiting_params)
+    @raiting.save
+    @hotel.update_raiting
+
+    @raiting.save ? redirect_to(hotel_path(@hotel)) : render("hotels/show")
+    #redirect_to hotel_path(@hotel)
   end
 
 

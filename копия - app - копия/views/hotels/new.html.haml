@@ -5,7 +5,7 @@
       %h2.panel-danger
         = pluralize(@hotel.errors.count, "error")
         prohibited
-        this hotel from being saved:
+        this article from being saved:
       %ul.list-unstyled
         - @hotel.errors.full_messages.each do |msg|
           %li.label-danger= msg

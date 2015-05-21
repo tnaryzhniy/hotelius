@@ -13,17 +13,17 @@ class Hotel < ActiveRecord::Base
   validates :stars, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
   validates :price, allow_blank: true, format: { with: VALID_PRICE_REGEX }
 
-  #def create_raiting(parameters)
-  #  @raiting = raitings.new(parameters)
-  #  @raiting.save
-  #  update_raiting
-  #end
+  def create_raiting(parameters)
+    @raiting = raitings.new(parameters)
+    @raiting.save
+    update_raiting
+  end
 
   def self.top_five
     Hotel.order(aver_raiting: :desc).first(5)
   end
 
-  #private
+  private
 
   def update_raiting
     aver = raitings.average('raiting')

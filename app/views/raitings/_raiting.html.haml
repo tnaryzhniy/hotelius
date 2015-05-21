@@ -1,0 +1,11 @@
+.well
+  %p
+    %strong Commenter:
+    = raiting.commenter
+  - if raiting.comment?
+    %p
+      %strong Comment:
+      = raiting.comment
+  %p
+    %strong Raiting:
+    = raiting.raiting

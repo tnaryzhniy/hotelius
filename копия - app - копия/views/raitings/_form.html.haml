@@ -1,0 +1,25 @@
+= simple_form_for([@hotel, @raiting]) do |f|
+  = f.error_notification
+  - if @raiting.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@raiting.errors.count, "error")
+        prohibited
+        this raiting from being saved:
+      %ul
+        - @raiting.errors.full_messages.each do |msg|
+          %li= msg
+  %p
+    = f.label :commenter
+    %br/
+    = current_user.email
+  %p
+    = f.label :comment
+    %br/
+    = f.text_area :comment
+  %p
+    = f.input :raiting, as: :radio_buttons, collection: 1..5
+  %p
+    = f.input :user_id, as: :hidden, :input_html => { :value => current_user.id }
+    = f.input :commenter, :as => :hidden, :input_html => { :value => current_user.email }
+    = f.submit
