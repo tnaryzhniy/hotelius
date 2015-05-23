@@ -1,0 +1,26 @@
+%tbody
+  %tr
+    %td
+      %b
+        = hotel.title
+      %p
+        %span Stars:
+        = hotel.stars
+    %td
+      = hotel.aver_raiting.nil? ? 0 : hotel.aver_raiting.round(2)
+    %td
+      %p
+        = hotel.rooms
+      %p
+        Breakfast:
+        - if hotel.breakfast
+          %b present
+        - else
+          %b no breakfast
+      = link_to 'Hotel details', hotel_path(hotel.id)
+    %td
+      = hotel.price
+    %td
+      = image_tag hotel.foto.url.to_s, height: '100px' if hotel.foto?
+    %td
+      = link_to 'Destroy', hotel_path(hotel), method: :delete, data: { confirm: 'Are you sure?' }
