@@ -24,11 +24,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-  gem 'bootstrap-sass'
-  gem 'haml-rails'
-  gem 'devise'
-  gem 'simple_form'
-  gem 'carrierwave'
+gem 'bootstrap-sass'
+gem 'haml-rails'
+gem 'devise'
+gem 'simple_form'
+gem 'carrierwave'
 
 
 group :development, :test do
@@ -37,8 +37,8 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-    gem 'rspec-rails'
-    gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
   group :test do
@@ -46,6 +46,7 @@ end
     gem 'capybara'
     gem 'spork', '~> 1.0rc'
     gem 'database_cleaner'
+    gem 'shoulda'
   end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

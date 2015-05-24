@@ -2,28 +2,17 @@ class Hotel < ActiveRecord::Base
   belongs_to :user
   has_one :address, dependent: :destroy
   has_many :raitings, dependent: :destroy
-
-  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :address, allow_destroy: true
 
   mount_uploader :foto, FotoUploader
 
-  VALID_PRICE_REGEX = /\A[-+]?(\d*[.])?\d+\z/
-
-  validates :title, presence: true, length: {minimum: 3, maximum: 80}
-  validates :stars, presence: true, numericality: { greater_than: 0, less_than_or_equal_to: 5 }
-  validates :price, allow_blank: true, format: { with: VALID_PRICE_REGEX }
-
-  #def create_raiting(parameters)
-  #  @raiting = raitings.new(parameters)
-  #  @raiting.save
-  #  update_raiting
-  #end
+  validates :title, presence: true, length: {minimum: 3, maximum: 80}, uniqueness:{ case_sensitive: false }
+  validates :stars, presence: true
+  validates :price, numericality: { greater_than: 0, less_than: 999999 }, allow_nil: true
 
   def self.top_five
     Hotel.order(aver_raiting: :desc).first(5)
   end
-
-  #private
 
   def update_raiting
     aver = raitings.average('raiting')

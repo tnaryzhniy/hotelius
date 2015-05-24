@@ -13,18 +13,17 @@ class HotelsController < ApplicationController
 
   def new
     @hotel = Hotel.new
-    @hotel.address = Address.new
+    @hotel.build_address
   end
 
   def create
     @hotel = Hotel.new(hotel_params)
     @hotel.user = current_user
-    @hotel.save ? redirect_to(@hotel) : render("hotels/new")
+    @hotel.save ? redirect_to(@hotel) : render('hotels/new')
   end
 
   def destroy
-    @hotel = Hotel.find(params[:id])
-    @hotel.destroy
+    Hotel.find(params[:id]).destroy
     redirect_to hotels_path
   end
 
