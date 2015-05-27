@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :hotel do
+    sequence(:id) { |i|  1 + i }
     title 'Hotel'
     stars 1
     breakfast false

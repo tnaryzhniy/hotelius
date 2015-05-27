@@ -41,13 +41,18 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
-  group :test do
-    gem 'faker'
-    gem 'capybara'
-    gem 'spork', '~> 1.0rc'
-    gem 'database_cleaner'
-    gem 'shoulda'
-  end
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'spork', '~> 1.0rc'
+  gem 'database_cleaner'
+  gem 'shoulda'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

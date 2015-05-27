@@ -1,11 +1,13 @@
 %h1 Listing hotels
-%p
-  - if user_signed_in?
-    = link_to 'Add new hotel', new_hotel_path, class: 'btn btn-danger btn-lg'
-  - else
-    %h4
-      %span
-        = link_to 'Sign in', new_user_session_path
-        %span to add new hotel
-
-= render 'hotels/hotels'
+.row
+  .col-md-11.col-lg-11
+    %p
+      - if user_signed_in?
+        = link_to 'Add new hotel', new_hotel_path, class: 'btn btn-danger btn-lg'
+      - else
+        %h4
+          %span
+            = link_to 'Sign in', new_user_session_path
+            %span to add new hotel
+    %ul.media-list
+      = render @hotels

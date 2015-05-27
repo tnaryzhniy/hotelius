@@ -4,8 +4,12 @@ class RaitingsController < ApplicationController
   def create
     @hotel = Hotel.find(params[:hotel_id])
     @raiting = @hotel.raitings.create(raiting_params)
-    @hotel.update_raiting
-    @raiting.save ? redirect_to(hotel_path(@hotel)) : render('hotels/show')
+    if @raiting.new_record?
+      render('hotels/show')
+    else
+      @hotel.update_raiting
+      redirect_to(hotel_path(@hotel))
+    end
   end
 
   private

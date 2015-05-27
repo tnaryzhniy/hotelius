@@ -1,12 +1,8 @@
-%h3
-  %b
-    = @hotel.title
-
-.col-md-6.col-md-offset-3
-  - if @raiting.errors.any?
+- if @raiting.errors.any?
+  .col-md-6.col-md-offset-3
     #error_explanation.well
       %h2.panel-danger
-        = pluralize(@raiting.errors.count, "error")
+        = pluralize(@raiting.errors.count, 'error')
         prohibited
         raiting for this hotel from being saved:
       %ul.list-unstyled
@@ -14,47 +10,62 @@
           %li.label-danger= msg
 
 .row
+  .col-md-8.col-lg-8
+    .panel.panel-danger
+      .panel-heading
+        %h4
+          %b
+            = @hotel.title
+          %span.pull-right
+            - @hotel.stars.times do
+              %span.glyphicon.glyphicon-star
+            - (5 - @hotel.stars).times do
+              %span.glyphicon.glyphicon-star-empty
+      .panel-body
+        .media-list
+          .media-left
+            = image_tag @hotel.foto.url.to_s, width: '300px' if @hotel.foto?
+            %br
+            %br
+            - unless @hotel.address.country.blank? & @hotel.address.state.blank? & @hotel.address.city.blank? & @hotel.address.street.blank?
+              %b Address:
+              .well.well-sm
+                %ul.list-unstyled
+                  - unless @hotel.address.country.blank?
+                    %li
+                      Country: #{@hotel.address.country}
+                  - unless @hotel.address.state.blank?
+                    %li
+                      State: #{@hotel.address.state}
+                  - unless @hotel.address.city.blank?
+                    %li
+                      City: #{@hotel.address.city}
+                  - unless @hotel.address.street.blank?
+                    %li
+                      Street: #{@hotel.address.street}
+          .media-body
+            %h4
+              %span User raiting:
+              %span.badge
+                = @hotel.aver_raiting.nil? ? 0 : @hotel.aver_raiting.round(2)
+            %p
+              %span Price for room:
+              %b
+                = @hotel.price
+            %p
+              %span Breakfast:
+              - if @hotel.breakfast
+                %b present
+              - else
+                %b no breakfast
+            - unless @hotel.rooms.blank?
+              .well.well-sm
+                = @hotel.rooms
+
+
+
+.row
   .col-md-6
-    %table.table.table-hover
-      %thead
-        %tr.danger
-          %th.col-xs-1 Title
-          %th.col-xs-6 Description
-      %tbody
-        %tr
-          %td.col-xs-1 Stars:
-          %td.col-xs-6= @hotel.stars
-        %tr
-          %td.col-xs-1 Users Raiting:
-          %td.col-xs-6
-            = @hotel.aver_raiting.nil? ? 0 : @hotel.aver_raiting.round(2)
-        %tr
-          %td.col-xs-1 Room description:
-          %td.col-xs-6= @hotel.rooms
-        %tr
-          %td.col-xs-1 Price:
-          %td.col-xs-6= @hotel.price
-        %tr
-          %td.col-xs-1 Breakfast:
-          - if @hotel.breakfast
-            %td.col-xs-6 present
-          - else
-            %td.col-xs-6 no breakfast
-        %tr
-          %td.col-xs-1 Foto:
-          %td.col-xs-6= image_tag @hotel.foto.url.to_s, height: '100px' if @hotel.foto?
-        %tr
-          %td Address
-          %td.col-xs-6
-            %ul.list-unstyled
-              %li
-                Country: #{@hotel.address.country}
-              %li
-                State: #{@hotel.address.state}
-              %li
-                City: #{@hotel.address.city}
-              %li
-                Street: #{@hotel.address.street}
     %br/
     %h2 Comments
     = render @hotel.raitings

@@ -1,16 +1,14 @@
 = simple_form_for([@hotel, @raiting]) do |f|
   = f.error_notification
-  %p
+  .form-group
     = f.label :commenter
     %br/
     = current_user.email
-  %p
+  .form-group
     = f.label :comment
     %br/
     = f.text_area :comment
-  %p
-    = f.input :raiting, as: :radio_buttons, collection: 1..5
-  %p
-    = f.input :user_id, as: :hidden, :input_html => { :value => current_user.id }
-    = f.input :commenter, :as => :hidden, :input_html => { :value => current_user.email }
-    = f.submit
+  = f.input :raiting, as: :radio_buttons, collection: 1..5
+  = f.input :user_id, as: :hidden, :input_html => { :value => current_user.id }
+  = f.input :commenter, :as => :hidden, :input_html => { :value => current_user.email }
+  = f.submit

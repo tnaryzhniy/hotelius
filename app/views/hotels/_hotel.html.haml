@@ -1,26 +1,23 @@
-%tbody
-  %tr
-    %td
-      %b
+%li.media
+  .well.well-sm
+    .media-left
+      = image_tag hotel.foto.url.to_s, width: '200px' if hotel.foto?
+    .media-body
+      %h3.media-heading
         = hotel.title
+        %small.pull-right
+          - hotel.stars.times do
+            %span.glyphicon.glyphicon-star
+          - (5 - hotel.stars).times do
+            %span.glyphicon.glyphicon-star-empty
       %p
-        %span Stars:
-        = hotel.stars
-    %td
-      = hotel.aver_raiting.nil? ? 0 : hotel.aver_raiting.round(2)
-    %td
+        %span User raiting:
+        %span.badge
+          = hotel.aver_raiting.nil? ? 0 : hotel.aver_raiting.round(2)
+      %p
+        %span Price for room:
+        %b
+          = hotel.price
       %p
         = hotel.rooms
-      %p
-        Breakfast:
-        - if hotel.breakfast
-          %b present
-        - else
-          %b no breakfast
-      = link_to 'Hotel details', hotel_path(hotel.id)
-    %td
-      = hotel.price
-    %td
-      = image_tag hotel.foto.url.to_s, height: '100px' if hotel.foto?
-    %td
-      = link_to 'Destroy', hotel_path(hotel), method: :delete, data: { confirm: 'Are you sure?' }
+      = link_to 'Hotel details', hotel_path(hotel.id), class: 'btn btn-info btn-lg'

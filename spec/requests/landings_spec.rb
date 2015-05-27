@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Landings', type: :request do
+describe 'Landings', type: :request do
   describe 'GET /landings' do
     it "should have the content 'Room description'" do
       visit '/landings/index'
