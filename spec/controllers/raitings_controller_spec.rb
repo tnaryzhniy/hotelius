@@ -11,7 +11,6 @@ describe RaitingsController, type: :controller do
       { post: '/hotels/1/raitings' }.should route_to(controller: 'raitings', action: 'create', hotel_id: '1')
       response.status.should be(200)
     end
-
   end
 
   describe 'actions' do

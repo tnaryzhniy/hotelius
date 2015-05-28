@@ -33,7 +33,7 @@ describe HotelsController, type: :controller do
     end
   end
 
-  describe 'actions' do
+  describe 'actions with autorized user' do
 
     before :each  do
       sign_in hotel.user
@@ -41,14 +41,14 @@ describe HotelsController, type: :controller do
 
     describe 'index action' do
       it 'renders index template' do
-        get :index, {}
+        get :index
         expect(response).to render_template('index')
       end
     end
 
     describe 'show action' do
       it 'renders show template' do
-        get :show, {id: hotel.id}
+        get :show, id: hotel.id
         expect(response).to render_template('show')
       end
     end
@@ -56,7 +56,7 @@ describe HotelsController, type: :controller do
     describe 'create action' do
 
       it 'creates a new Hotel' do
-        expect { post :create, :hotel => { title: 'test', stars: 5 , price: 100 } }.to change(Hotel,:count).by(1)
+        expect { post :create, hotel: { title: 'test', stars: 5 , price: 100 } }.to change(Hotel,:count).by(1)
         expect(assigns(:hotel)).to eq(Hotel.last)
       end
 
@@ -73,8 +73,6 @@ describe HotelsController, type: :controller do
 
     describe 'destroy action' do
 
-      :hotel
-
       it 'destroys the requested hotel' do
         expect {
           delete :destroy, id: hotel.id
@@ -87,5 +85,4 @@ describe HotelsController, type: :controller do
       end
     end
   end
-
 end
