@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Raiting do
   let(:raiting) { FactoryGirl.create(:raiting) }
 
-  describe 'respond tests' do
+  context 'respond tests' do
     subject {raiting}
 
     it { should respond_to(:raiting) }
@@ -14,16 +14,16 @@ describe Raiting do
     it { should be_valid }
   end
 
-  describe 'validation tests' do
+  context 'validation tests' do
 
-    describe 'raiting tests' do
+    context 'raiting tests' do
       it 'raiting is not present' do
         raiting.raiting = ''
         should_not be_valid
       end
     end
 
-    describe 'comment tests' do
+    context 'comment tests' do
       it 'comment is not present' do
         raiting.comment = ''
         should_not be_valid

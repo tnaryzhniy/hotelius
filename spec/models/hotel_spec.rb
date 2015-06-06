@@ -5,7 +5,7 @@ describe Hotel do
   let(:hotel) { FactoryGirl.create(:hotel) }
   let(:user) { FactoryGirl.create(:user) }
 
-  describe 'respond tests' do
+  context 'respond tests' do
     subject {hotel}
 
     it { should respond_to(:title) }
@@ -18,10 +18,10 @@ describe Hotel do
     it { should be_valid }
   end
 
-  describe 'validation tests' do
+  context 'validation tests' do
     subject {hotel}
 
-    describe 'title tests' do
+    context 'title tests' do
       it 'title is not present' do
         hotel.title = ''
         should_not be_valid
@@ -46,14 +46,14 @@ describe Hotel do
       end
     end
 
-    describe 'stars tests' do
+    context 'stars tests' do
       it 'stars is not present' do
         hotel.stars = ''
         should_not be_valid
       end
     end
 
-    describe 'price tests' do
+    context 'price tests' do
       it 'price is not present' do
         hotel.price = ''
         should be_valid
@@ -71,7 +71,7 @@ describe Hotel do
     end
   end
 
-  describe 'method tests' do
+  context 'method tests' do
     it '#update_raiting should update aver_raiting' do
       FactoryGirl.create_list(:raiting, 4, hotel: hotel, raiting: 2)
       hotel.send(:update_raiting)
@@ -82,7 +82,7 @@ describe Hotel do
       expect(hotel.reload.aver_raiting).to eq(2.4)
     end
 
-    describe '#top_five should generate list of top rated hotels' do
+    context '#top_five should generate list of top rated hotels' do
       FactoryGirl.create(:hotel, title: 'hotel_top_4', stars: 1, aver_raiting: 4)
       FactoryGirl.create(:hotel, title: 'hotel_not_in_top_1', stars: 1, aver_raiting: 2)
       FactoryGirl.create(:hotel, title: 'hotel_top_3', stars: 1, aver_raiting: 6)
@@ -103,7 +103,6 @@ describe Hotel do
         it 'last element of list must have name "hotel_top_5"' do
           expect(top5.last.title).to eq('hotel_top_5')
         end
-
     end
   end
 

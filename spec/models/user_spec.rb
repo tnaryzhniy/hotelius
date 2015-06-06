@@ -3,7 +3,7 @@ require 'rails_helper'
 describe User do
   let(:user) { FactoryGirl.create(:user) }
 
-  describe 'respond tests' do
+  context 'respond tests' do
     subject {user}
 
     it { should respond_to(:id) }
@@ -12,7 +12,7 @@ describe User do
     it { should be_valid }
   end
 
-  describe 'validation tests' do
+  context 'validation tests' do
     subject {user}
 
     it 'id is not present' do
@@ -20,13 +20,13 @@ describe User do
       should_not be_valid
     end
 
-    describe 'email tests' do
+    context 'email tests' do
       it 'email is not present' do
         user.email = ''
         should_not be_valid
       end
 
-      describe 'email format is invalid' do
+      context 'email format is invalid' do
         it 'should be invalid' do
           email = %w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com foo@bar..com]
           email.each do |invalid_email|
@@ -36,7 +36,7 @@ describe User do
         end
       end
 
-      describe 'email format is valid' do
+      context 'email format is valid' do
         it 'should be valid' do
           email = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
           email.each do |valid_email|
@@ -54,7 +54,7 @@ describe User do
         user_with_same_email.should_not be_valid
       end
 
-      describe 'email with mixed case' do
+      context 'email with mixed case' do
         let(:mixed_case_email) { 'Foo@ExAMPle.CoM' }
 
         it 'should be saved as all lower-case' do
@@ -65,7 +65,7 @@ describe User do
       end
     end
 
-    describe 'password tests' do
+    context 'password tests' do
       it 'password is not present' do
         user.encrypted_password = user.password_confirmation = ''
         should_not be_valid
@@ -82,6 +82,4 @@ describe User do
       end
     end
   end
-
-
 end

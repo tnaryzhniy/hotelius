@@ -5,7 +5,7 @@ describe RaitingsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:hotel) { FactoryGirl.create(:hotel, user_id: user.id) }
 
-  describe 'route' do
+  context 'route' do
 
     it 'should generate create params' do
       { post: '/hotels/1/raitings' }.should route_to(controller: 'raitings', action: 'create', hotel_id: '1')
@@ -13,13 +13,13 @@ describe RaitingsController, type: :controller do
     end
   end
 
-  describe 'actions' do
+  context 'actions' do
 
     before { sign_in hotel.user }
     before { :hotel }
     before { :user }
 
-    describe 'create action' do
+    context 'create action' do
 
       it 'creates a new raiting' do
         expect{post :create, {:raiting => {comment: 'test', raiting: 3, user_id: user.id, commenter: user.email },

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Address do
   let(:address) { FactoryGirl.create(:address) }
 
-  describe 'respond tests' do
+  context 'respond tests' do
     subject {address}
 
     it { should respond_to(:country) }
@@ -14,7 +14,7 @@ describe Address do
     it { should be_valid }
   end
 
-  describe 'validation tests' do
+  context 'validation tests' do
     subject {address}
     it 'country is too long' do
       address.country = 'z' * 51

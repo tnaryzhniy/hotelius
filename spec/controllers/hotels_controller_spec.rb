@@ -5,7 +5,7 @@ describe HotelsController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:hotel) { FactoryGirl.create(:hotel, user_id: user.id) }
 
-  describe 'route' do
+  context 'route' do
 
     it 'should generate index params' do
       { get: '/hotels' }.should route_to(controller: 'hotels', action: 'index')
@@ -33,28 +33,27 @@ describe HotelsController, type: :controller do
     end
   end
 
-  describe 'actions with autorized user' do
+  context 'actions with autorized user' do
 
     before :each  do
       sign_in hotel.user
     end
 
-    describe 'index action' do
+    context 'index action' do
       it 'renders index template' do
         get :index
         expect(response).to render_template('index')
       end
     end
 
-    describe 'show action' do
+    context 'show action' do
       it 'renders show template' do
         get :show, id: hotel.id
         expect(response).to render_template('show')
       end
     end
 
-    describe 'create action' do
-
+    context 'create action' do
       it 'creates a new Hotel' do
         expect { post :create, hotel: { title: 'test', stars: 5 , price: 100 } }.to change(Hotel,:count).by(1)
         expect(assigns(:hotel)).to eq(Hotel.last)
@@ -62,7 +61,7 @@ describe HotelsController, type: :controller do
 
       it 'redirects to newly created hotel if validations pass' do
         post :create, hotel: {title: 'test', stars: 3, price: 300}
-        response.should redirect_to(hotel_path(Hotel.last))
+        expect(response).to redirect_to(hotel_path(Hotel.last))
       end
 
       it 'renders new template if validations fail' do
@@ -71,7 +70,7 @@ describe HotelsController, type: :controller do
       end
     end
 
-    describe 'destroy action' do
+    context 'destroy action' do
 
       it 'destroys the requested hotel' do
         expect {
