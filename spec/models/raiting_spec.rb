@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe Raiting do
-  let(:raiting) { FactoryGirl.create(:raiting) }
+  let(:hotel) { FactoryGirl.create(:hotel) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:raiting) { FactoryGirl.create(:raiting, hotel: hotel, user_id: user.id) }
 
   context 'respond tests' do
     subject {raiting}

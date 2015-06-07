@@ -73,11 +73,11 @@ describe Hotel do
 
   context 'method tests' do
     it '#update_raiting should update aver_raiting' do
-      FactoryGirl.create_list(:raiting, 4, hotel: hotel, raiting: 2)
+      FactoryGirl.create_list(:raiting, 4, hotel: hotel, raiting: 2, user_id: user.id)
       hotel.send(:update_raiting)
       expect(hotel.reload.aver_raiting).to eq(2)
 
-      FactoryGirl.create(:raiting, hotel: hotel, raiting: 4)
+      FactoryGirl.create(:raiting, hotel: hotel, raiting: 4, user_id: user.id)
       hotel.send(:update_raiting)
       expect(hotel.reload.aver_raiting).to eq(2.4)
     end

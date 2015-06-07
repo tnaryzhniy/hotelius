@@ -65,7 +65,7 @@ describe HotelsController, type: :controller do
       end
 
       it 'renders new template if validations fail' do
-        post :create, hotel: {title: 'Hotel', stars: 3, price: 300}
+        post :create, hotel: {title: 'Hotel', price: 300}
         expect(response).to render_template('new')
       end
     end
